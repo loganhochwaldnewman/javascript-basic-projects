@@ -1,17 +1,3 @@
-const form = document.getElementById("todo-form");
-const todoInput = document.getElementById("todo-input");
-const submitBtn = document.getElementById("submit-btn");
-const list = document.getElementById("todo-list");
-
-form.addEventListener("submit", addItem);
-
-function addItem(e) {
-  e.preventDefault();
-  const value = todoInput.value.trim();
-  if (value === "") return;
-  createListItem(value);
-  todoInput.value = "";
-}
 
 function createListItem(todoListText) {
   const listItem = document.createElement("div");
@@ -24,17 +10,40 @@ function createListItem(todoListText) {
 
   const deleteBtn = document.createElement("button");
   deleteBtn.setAttribute("type", "button");
-  deleteBtn.setAttribute("id", "delete-btn");
   deleteBtn.innerHTML = "Delete";
   deleteBtn.addEventListener("click", deleteItem);
 
   listItem.appendChild(deleteBtn);
 
+  const list = document.getElementById("todo-list");
   list.appendChild(listItem);
 }
 
 
 function deleteItem(e) {
   const listItem = e.currentTarget.parentElement;
+
+  const list = document.getElementById("todo-list");
   list.removeChild(listItem);
 }
+
+
+////////////// DO NOT EDIT ANY CODE BELOW THIS LINE //////////////
+
+// variable referencing the todo-input element
+const todoInput = document.getElementById("todo-input");
+
+// variable referencing the form
+const form = document.getElementById("todo-form");
+
+// attaching the addItem function to the form when it's submitted
+form.addEventListener("submit", addItem);
+
+// adding the todo text to the page after submit
+function addItem(e) {
+    e.preventDefault();
+    const value = todoInput.value.trim();
+    if (value === "") return;
+    createListItem(value);
+    todoInput.value = "";
+  }
